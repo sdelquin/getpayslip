@@ -5,7 +5,6 @@ import os
 from log import init_logger
 import datetime
 from dateutil.relativedelta import relativedelta
-import sys
 import re
 import calendar
 import elasticemail
@@ -19,8 +18,9 @@ class PaySlip():
         self.month = month or today.month
         self.year = year or today.year
 
+    @property
     def id(self):
-        return "{}{:02}".format(self.year, self.month)
+        return f"{self.year}{self.month:02}"
 
     @staticmethod
     def clean():
@@ -51,8 +51,8 @@ class PaySlip():
             cookies = dict(r.cookies)
         except Exception as err:
             logger.error(err)
-            logger.error("First ASP session cookie NOT FOUND! Exiting...")
-            sys.exit()
+            logger.error("First ASP session cookie NOT FOUND!")
+            raise Exception()
 
         logger.debug("Getting the SUA cookie")
         try:
@@ -64,8 +64,8 @@ class PaySlip():
             cookies = {**cookies, **new_cookies}
         except Exception as err:
             logger.error(err)
-            logger.error("SUA cookie NOT FOUND! Exiting...")
-            sys.exit()
+            logger.error("SUA cookie NOT FOUND!")
+            raise Exception()
 
         logger.debug("Getting the second ASP session cookie")
         try:
@@ -77,35 +77,35 @@ class PaySlip():
         except Exception as err:
             logger.error(err)
             logger.error(
-                "Second ASP session cookie NOT FOUND! Exiting..."
+                "Second ASP session cookie NOT FOUND!"
             )
-            sys.exit()
+            raise Exception()
 
         logger.debug("Getting the payslip in PDF format")
-        payslip_url = config.URL4 + self.id()
+        payslip_url = config.URL4 + self.id
         try:
             r = requests.get(payslip_url,
                              cookies=cookies,
                              timeout=config.REQUEST_TIMEOUT)
         except Exception as err:
             logger.error(err)
-            logger.error("Timeout in getting the payslip! Exiting...")
-            sys.exit()
+            logger.error("Timeout in getting the payslip!")
+            raise Exception()
 
         if not re.search(r"{}".format(config.ERROR_STRING_IN_RESPONSE),
                          r.text, re.IGNORECASE):
-            self.output_filename = "{}.pdf".format(self.id())
+            self.output_filename = "{}.pdf".format(self.id)
             logger.debug("Writing response to {}".format(self.output_filename))
             f = open("{}".format(self.output_filename), "wb")
             f.write(r.content)
             f.close()
         else:
             logger.warning("Payslip does no exist!")
-            sys.exit()
+            raise Exception()
 
     def update_last_payslip(self):
         f = open(config.LAST_DOWNLOADED_PAYSLIP_FILE, "w")
-        f.write(self.id())
+        f.write(self.id)
         f.close()
 
     def send_payslip(self):

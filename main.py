@@ -40,8 +40,12 @@ def main(month, year, next_month, send_mail, clean):
         logger.debug("next-month option enabled")
         p.set_next_month()
 
-    logger.info("Beginning access to payslip")
-    p.get_payslip()
+    logger.info(f"Beginning access to payslip {p.id}")
+    try:
+        p.get_payslip()
+    except:
+        logger.error("Exiting...")
+        sys.exit()
 
     if next_month:
         logger.info("Updating last-payslip file")
