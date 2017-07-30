@@ -1,0 +1,6 @@
+*.pdf
+*.pyc
+*.log
+*.dat
+.DS_Store
+config.py
