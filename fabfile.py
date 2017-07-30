@@ -1,4 +1,4 @@
-from fabric.api import local, prefix, cd, run
+from fabric.api import local, prefix, cd, run, env
 
 env.hosts = ["production"]
 
