@@ -22,10 +22,10 @@ class PaySlip():
     def id(self):
         return "{}{:02}".format(self.year, self.month)
 
-    def clean(self):
+    @staticmethod
+    def clean():
         for f in glob.glob("*.pdf"):
             os.remove(f)
-        sys.exit()
 
     def set_next_month(self):
         try:

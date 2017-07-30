@@ -1,5 +1,6 @@
 import click
 import datetime
+import sys
 from log import init_logger
 from payslip import PaySlip
 
@@ -32,7 +33,8 @@ def main(month, year, next_month, send_mail, clean):
 
     if clean:
         logger.info("Removing all downloaded payslips in pdf format")
-        p.clean()
+        PaySlip.clean()
+        sys.exit()
 
     if next_month:
         logger.debug("next-month option enabled")
