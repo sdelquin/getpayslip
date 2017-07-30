@@ -14,9 +14,10 @@ logger = init_logger(__file__)
 
 
 class PaySlip():
-    def __init__(self):
+    def __init__(self, month=None, year=None):
         today = datetime.date.today()
-        self.year, self.month = today.year, today.month
+        self.month = month or today.month
+        self.year = year or today.year
 
     def id(self):
         return "{}{:02}".format(self.year, self.month)

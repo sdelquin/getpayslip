@@ -28,7 +28,7 @@ today = datetime.date.today()
               is_flag=True,
               help="Remove already downloaded payslips in pdf format")
 def main(month, year, next_month, send_mail, clean):
-    p = PaySlip()
+    p = PaySlip(month, year)
 
     if clean:
         logger.info("Removing all downloaded payslips in pdf format")
@@ -48,6 +48,7 @@ def main(month, year, next_month, send_mail, clean):
     if send_mail:
         logger.info("Sending mail attached with downloaded payslip")
         p.send_payslip()
+
 
 if __name__ == "__main__":
     main()
