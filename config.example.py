@@ -19,7 +19,7 @@ Scripts/SUAGDILoginMetodos.asp"
 URL3 = "https://www.gobiernodecanarias.org/educacion/8/Certificados/\
 NominillasInter/Scripts/NominillasMain.asp"
 URL4 = "https://www.gobiernodecanarias.org/educacion/8/Certificados/\
-NominillasInter/Scripts/imprimir.asp?nominilla="
+NominillasInter/Scripts/imprimir_ws.asp?nominilla="
 
 LOGIN_POST_DATA = {
     "h": "",
