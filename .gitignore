@@ -5,3 +5,5 @@
 .DS_Store
 config.py
 cache
+.vscode
+.pytest_cache

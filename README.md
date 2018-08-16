@@ -9,7 +9,7 @@ Tool for getting the monthly payslips of Consejería de Educación GOBCAN
 3. Activate the *virtualenv* and follow these steps:
 
 ~~~bash
->> pip install -r requirements.txt
+>> pipenv install
 >> cp config.example.py config.py
 # edit config.py with your own values
 ~~~

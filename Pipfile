@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+click = "*"
+python-dateutil = "*"
+pytest = "*"
+"pypdf2" = "*"
+
+[dev-packages]
+ipython = "*"
+"flake8" = "*"
+rope = "*"
+"fabric3" = "*"
+
+[requires]
+python_version = "3.6"

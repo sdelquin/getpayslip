@@ -2,5 +2,4 @@
 # Master script.
 
 cd "$(dirname "$0")"
-source $HOME/.virtualenvs/getpayslip/bin/activate
-python main.py -n -e
+exec pipenv run python main.py -n -e
