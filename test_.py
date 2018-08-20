@@ -26,5 +26,5 @@ def getpayslip(month, year):
 
 
 def test():
-    for t in [(m, y) for m in [1, 6, 12] for y in [2014, 2015, 2016]]:
-        getpayslip(*t)
+    previous_month = datetime.datetime.now() - datetime.timedelta(days=31)
+    getpayslip(previous_month.month, previous_month.year)

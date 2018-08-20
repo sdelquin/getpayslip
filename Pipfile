@@ -9,6 +9,8 @@ click = "*"
 python-dateutil = "*"
 pytest = "*"
 "pypdf2" = "*"
+prettyconf = "*"
+sgw = {git = "https://github.com/sdelquin/sgw.git"}
 
 [dev-packages]
 ipython = "*"

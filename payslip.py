@@ -7,7 +7,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import re
 import calendar
-import elasticemail
+from sgw.core import SendGrid
 
 logger = init_logger(__file__)
 
@@ -110,10 +110,15 @@ class PaySlip():
 
     def send_payslip(self):
         month_name = calendar.month_name[self.month]
-        elasticemail.send(
+        email = SendGrid(
+            config.SENDGRID_APIKEY,
+            config.SENDGRID_FROM_EMAIL,
+            config.SENDGRID_FROM_NAME
+        )
+        email.send(
             to=config.TO_EMAIL_ADDRESS,
-            subject="Payslip {} {}".format(month_name, self.year),
-            body="It's only money 💶💶💶 but I like it! 🐼",
+            subject='Payslip {} {}'.format(month_name, self.year),
+            msg="It's only money 💶💶💶 but I like it! 🐼",
             attachments=self.output_filename
         )
         logger.debug("Deleting {}".format(self.output_filename))

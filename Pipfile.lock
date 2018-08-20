@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "eae68012a0db5c6b5af840f29b3df9521b4c19afff1e331eca1c97efa6d0630f"
+            "sha256": "a4275d0af0559311df7d334b11be9474cc061b2777cf28bc6dd04d0fbdb15796"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -75,6 +75,13 @@
             "markers": "python_version != '3.0.*' and python_version != '3.3.*' and python_version >= '2.7' and python_version != '3.1.*' and python_version != '3.2.*'",
             "version": "==0.7.1"
         },
+        "prettyconf": {
+            "hashes": [
+                "sha256:83a23f3e01a2bb3c42c938c7823e61dcaf2eab47b27f5ed1e9fb76b2afe2023e"
+            ],
+            "index": "pypi",
+            "version": "==1.2.3"
+        },
         "py": {
             "hashes": [
                 "sha256:3fd59af7435864e1a243790d322d763925431213b6b8529c6ca71081ace3bbf7",
@@ -92,11 +99,11 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:86a8dbf407e437351cef4dba46736e9c5a6e3c3ac71b2e942209748e76ff2086",
-                "sha256:e74466e97ac14582a8188ff4c53e6cc3810315f342f6096899332ae864c1d432"
+                "sha256:3459a123ad5532852d36f6f4501dfe1acf4af1dd9541834a164666aa40395b02",
+                "sha256:96bfd45dbe863b447a3054145cd78a9d7f31475d2bce6111b133c0cc4f305118"
             ],
             "index": "pypi",
-            "version": "==3.7.1"
+            "version": "==3.7.2"
         },
         "python-dateutil": {
             "hashes": [
@@ -113,6 +120,10 @@
             ],
             "index": "pypi",
             "version": "==2.19.1"
+        },
+        "sgw": {
+            "git": "https://github.com/sdelquin/sgw.git",
+            "ref": "f14e1509d1cd2137c566b5290ada448abdbbc4d7"
         },
         "six": {
             "hashes": [

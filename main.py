@@ -43,7 +43,7 @@ def main(month, year, next_month, send_mail, clean):
     logger.info(f"Beginning access to payslip {p.id}")
     try:
         p.get_payslip()
-    except:
+    except Exception:
         logger.error("Exiting...")
         sys.exit()
 
