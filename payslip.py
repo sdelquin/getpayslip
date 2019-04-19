@@ -56,6 +56,7 @@ class PaySlip():
     def get_payslip(self, update_last_payslip=True):
         self.clean()
 
+        logger.info('Loading first page')
         self.driver.get(config.PAYSLIP_URL)
         # login
         logger.info('Login')
