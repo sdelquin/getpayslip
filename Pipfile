@@ -4,13 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "*"
 click = "*"
-python-dateutil = "*"
 pytest = "*"
 "pypdf2" = "*"
 prettyconf = "*"
 sgw = {git = "https://github.com/sdelquin/sgw.git"}
+selenium = "*"
 
 [dev-packages]
 ipython = "*"

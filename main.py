@@ -1,6 +1,9 @@
-import click
 import datetime
 import sys
+
+import click
+
+import date_utils
 from log import init_logger
 from payslip import PaySlip
 
@@ -9,18 +12,6 @@ today = datetime.date.today()
 
 
 @click.command()
-@click.option("-m",
-              "--month",
-              default=today.month,
-              help="Ordinal number of month from which takes the payslip")
-@click.option("-y",
-              "--year",
-              default=today.year,
-              help="Year from which takes the payslip")
-@click.option("-n",
-              "--next-month",
-              is_flag=True,
-              help="Indicates if get the next non-downloaded payslip")
 @click.option("-e",
               "--send-mail",
               is_flag=True,
@@ -28,33 +19,21 @@ today = datetime.date.today()
 @click.option("--clean",
               is_flag=True,
               help="Remove already downloaded payslips in pdf format")
-def main(month, year, next_month, send_mail, clean):
-    p = PaySlip(month, year)
-
+def main(send_mail, clean):
     if clean:
-        logger.info("Removing all downloaded payslips in pdf format")
         PaySlip.clean()
         sys.exit()
 
-    if next_month:
-        logger.debug("next-month option enabled")
-        p.set_next_month()
-
-    logger.info(f"Beginning access to payslip {p.id}")
+    p = PaySlip(*date_utils.find_next_month())
     try:
-        p.get_payslip()
-    except Exception:
-        logger.error("Exiting...")
+        result = p.get_payslip()
+    except Exception as err:
+        logger.error(err)
         sys.exit()
 
-    if next_month:
-        logger.info("Updating last-payslip file")
-        p.update_last_payslip()
-
-    if send_mail:
-        logger.info("Sending mail attached with downloaded payslip")
+    if send_mail and result:
         p.send_payslip()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
