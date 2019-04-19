@@ -2,4 +2,4 @@
 # Master script.
 
 cd "$(dirname "$0")"
-exec pipenv run python main.py -n -e
+exec pipenv run python main.py -e
