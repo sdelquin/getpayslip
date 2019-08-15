@@ -14,6 +14,11 @@ $ vi .env    # set the corresponding values
 ...
 ~~~
 
+## Requirements
+
+1. Firefox
+2. Geckodriver
+
 ## Usage
 
 ~~~console
