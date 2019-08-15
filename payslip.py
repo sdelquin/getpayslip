@@ -60,11 +60,11 @@ class PaySlip():
         self.driver.get(config.PAYSLIP_URL)
         # login
         logger.info('Login')
-        element = self.driver.find_element_by_id('Nif')
+        element = self.driver.find_element_by_id('username')
         element.send_keys(config.MEDUSA_USERNAME)
-        element = self.driver.find_element_by_id('ClaveActual')
+        element = self.driver.find_element_by_id('password')
         element.send_keys(config.MEDUSA_PASSWORD)
-        element = self.driver.find_element_by_id('login_sua')
+        element = self.driver.find_element_by_id('btn-login')
         element.click()
         # wait for page to be loaded
         try:
