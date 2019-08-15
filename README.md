@@ -25,9 +25,6 @@ $ vi .env    # set the corresponding values
 Usage: main.py [OPTIONS]
 
 Options:
-  -m, --month INTEGER  Ordinal number of month from which takes the payslip
-  -y, --year INTEGER   Year from which takes the payslip
-  -n, --next-month     Indicates if get the next non-downloaded payslip
   -e, --send-mail      Indicates if an email will be sent
   --clean              Remove already downloaded payslips in pdf format
   --help               Show this message and exit.
@@ -35,25 +32,16 @@ Options:
 
 ## Examples
 
-> Download payslip of April 2015
+> Download next payslip:
 
 ~~~bash
->> python main.py -m 4 -y 2015
+>> python main.py
 ~~~
 
-> Download next payslip (based on last execution)
+> Download next payslip and send it attached on email:
 
 ~~~bash
->> python main.py -n
-~~~
-
-> Download next payslip and send it attached on email.
-> You should configure your email in `config.py`.
-
-~~~bash
->> python main.py -n -e
-# this is the same as:
->> run.sh
+>> python main.py -e
 ~~~
 
 ## Tests
