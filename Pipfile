@@ -8,6 +8,7 @@ click = "*"
 pytest = "*"
 "pypdf2" = "*"
 prettyconf = "*"
+sendgrid = "==5.6.0"
 sgw = {git = "https://github.com/sdelquin/sgw.git"}
 selenium = "*"
 
