@@ -57,7 +57,13 @@ class PaySlip():
         self.clean()
 
         logger.info('Loading first page')
-        self.driver.get(config.PAYSLIP_URL)
+        try:
+            self.driver.get(config.PAYSLIP_URL)
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.ID, 'btn-login')))
+        except TimeoutException:
+            logger.error('Timeout waiting for page loading')
+            return False
         # login
         logger.info('Login')
         element = self.driver.find_element_by_id('username')
