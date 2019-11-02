@@ -14,5 +14,5 @@ LAST_DOWNLOADED_PAYSLIP_FILE = config(
     default='last_payslip.dat'
 )
 
-PAYSLIP_URL = 'https://www.gobiernodecanarias.org/educacion/8/Certificados/\
-NominillasInter/scripts/nominillasmain.asp'
+PAYSLIP_URL = config('PAYSLIP_URL',
+                     default='https://www.gobiernodecanarias.org/educacion')
