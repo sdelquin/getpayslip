@@ -71,9 +71,9 @@ class PaySlip():
         element = self.driver.find_element_by_id('password')
         element.send_keys(config.MEDUSA_PASSWORD)
         element = self.driver.find_element_by_id('btn-login')
-        element.click()
         # wait for page to be loaded
         try:
+            element.click()
             payslip_button = WebDriverWait(self.driver, config.TIME_OUT).until(
                 EC.presence_of_element_located((By.NAME, 'ultima')))
         except TimeoutException:
