@@ -19,12 +19,15 @@ today = datetime.date.today()
 @click.option("--clean",
               is_flag=True,
               help="Remove already downloaded payslips in pdf format")
-def main(send_mail, clean):
+@click.option("--browser",
+              is_flag=True,
+              help="Show the browser for debugging purposes")
+def main(send_mail, clean, browser):
     if clean:
         PaySlip.clean()
         sys.exit()
 
-    p = PaySlip(*date_utils.find_next_month())
+    p = PaySlip(*date_utils.find_next_month(), headless=not browser)
     try:
         result = p.get_payslip()
     except Exception as err:

@@ -18,15 +18,15 @@ logger = init_logger(__file__)
 
 
 class PaySlip():
-    def __init__(self, month, year):
+    def __init__(self, month, year, headless=True):
         logger.info('START: Building PaySlip object')
         self.month, self.year = month, year
-        self._init_webdriver()
+        self._init_webdriver(headless)
 
-    def _init_webdriver(self):
+    def _init_webdriver(self, headless):
         # selenium configurations
         options = Options()
-        options.headless = True
+        options.headless = headless
 
         profile = webdriver.FirefoxProfile()
         profile.set_preference('browser.download.folderList', 2)
