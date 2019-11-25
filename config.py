@@ -16,3 +16,6 @@ LAST_DOWNLOADED_PAYSLIP_FILE = config(
 
 PAYSLIP_URL = config('PAYSLIP_URL',
                      default='https://www.gobiernodecanarias.org/educacion')
+
+# seconds waiting for each page loading
+TIME_OUT = config('TIME_OUT', default=10, cast=int)

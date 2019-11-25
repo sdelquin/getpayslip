@@ -59,7 +59,7 @@ class PaySlip():
         logger.info('Loading first page')
         try:
             self.driver.get(config.PAYSLIP_URL)
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, config.TIME_OUT).until(
                 EC.presence_of_element_located((By.ID, 'btn-login')))
         except TimeoutException:
             logger.error('Timeout waiting for page loading')
@@ -74,7 +74,7 @@ class PaySlip():
         element.click()
         # wait for page to be loaded
         try:
-            payslip_button = WebDriverWait(self.driver, 10).until(
+            payslip_button = WebDriverWait(self.driver, config.TIME_OUT).until(
                 EC.presence_of_element_located((By.NAME, 'ultima')))
         except TimeoutException:
             logger.error('Timeout waiting for page loading')
