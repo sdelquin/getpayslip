@@ -1,10 +1,11 @@
-from fabric.api import local, cd, run, env
+from fabric.api import local, cd, run, env, prefix
 
-env.hosts = ['production']
+env.hosts = ['cloud']
 
 
 def deploy():
     local('git push')
-    with cd('~/getpayslip'):
-        run('git pull')
-        run('pipenv install')
+    with prefix('source ~/.virtualenvs/getpayslip/bin/activate'):
+        with cd('~/code/getpayslip'):
+            run('git pull')
+            run('pip install -r requirements.txt')
