@@ -1,6 +1,6 @@
 from fabric.api import local, cd, run, env, prefix
 
-env.hosts = ['cloud']
+env.hosts = ['sdelquin.me']
 
 
 def deploy():
