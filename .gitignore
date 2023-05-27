@@ -7,3 +7,4 @@ cache
 .vscode
 .pytest_cache
 .env
+.python-version
