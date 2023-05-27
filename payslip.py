@@ -70,7 +70,7 @@ class PaySlip:
         try:
             self.driver.get(config.PAYSLIP_URL)
             WebDriverWait(self.driver, config.TIME_OUT).until(
-                EC.presence_of_element_located((By.ID, 'btn-login'))
+                EC.presence_of_element_located((By.ID, 'id-login'))
             )
         except TimeoutException:
             logger.error('Timeout waiting for page loading')
@@ -81,7 +81,7 @@ class PaySlip:
         element.send_keys(config.MEDUSA_USERNAME)
         element = self.driver.find_element_by_id('password')
         element.send_keys(config.MEDUSA_PASSWORD)
-        element = self.driver.find_element_by_id('btn-login')
+        element = self.driver.find_element_by_id('boton-login')
         # wait for page to be loaded
         try:
             element.click()
