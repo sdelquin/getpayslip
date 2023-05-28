@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from sgw.core import SendGrid
+from sendgrify import SendGrid
 
 import config
 import date_utils
