@@ -24,10 +24,6 @@ class PaySlip:
         self._init_webdriver(headless)
 
     def _init_webdriver(self, headless):
-        # Selenium configurations
-        options = Options()
-        options.headless = headless
-
         profile = webdriver.FirefoxProfile()
         # Controls the default folder to download a file to. 0 indicates the Desktop;
         # 1 indicates the systems default downloads location; 2 indicates a custom folder.
@@ -46,7 +42,11 @@ class PaySlip:
         # Adobe Acrobat version should do the trick.
         profile.set_preference('plugin.scan.Acrobat', '99.0')
 
-        self.driver = webdriver.Firefox(options=options, firefox_profile=profile)
+        options = Options()
+        options.add_argument('-headless')
+        options.profile = profile
+
+        self.driver = webdriver.Firefox(options=options)
 
     def __del__(self):
         self.driver.quit()
@@ -77,11 +77,11 @@ class PaySlip:
             return False
         # login
         logger.info('Login')
-        element = self.driver.find_element_by_id('username')
+        element = self.driver.find_element(By.ID, 'username')
         element.send_keys(config.MEDUSA_USERNAME)
-        element = self.driver.find_element_by_id('password')
+        element = self.driver.find_element(By.ID, 'password')
         element.send_keys(config.MEDUSA_PASSWORD)
-        element = self.driver.find_element_by_id('boton-login')
+        element = self.driver.find_element(By.ID, 'boton-login')
         # wait for page to be loaded
         try:
             element.click()
@@ -91,10 +91,11 @@ class PaySlip:
         except TimeoutException:
             logger.error('Timeout waiting for page loading')
             return False
-        element = self.driver.find_element_by_xpath(
+        element = self.driver.find_element(
+            By.XPATH,
             '//*[@id=\
 "principal_interior"]/table/tbody/tr[3]/td/table/tbody/tr/td[3]/table/tbody/\
-tr/td[2]/table/tbody/tr/td/table[9]/tbody/tr[2]/td[3]'
+tr/td[2]/table/tbody/tr/td/table[9]/tbody/tr[2]/td[3]',
         )
         month, year = date_utils.parse_date(element.text)
 
@@ -112,7 +113,7 @@ tr/td[2]/table/tbody/tr/td/table[9]/tbody/tr[2]/td[3]'
 
     def _update_last_payslip(self):
         logger.info('Updating last-payslip file')
-        f = open(config.LAST_DOWNLOADED_PAYSLIP_FILE, "w")
+        f = open(config.LAST_DOWNLOADED_PAYSLIP_FILE, 'w')
         f.write(self.id)
         f.close()
 
