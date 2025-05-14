@@ -17,4 +17,6 @@ jobs:
           host: matraka.es
           username: ${{ secrets.PRODUCTION_SSH_USERNAME }}
           key: ${{ secrets.PRODUCTION_SSH_KEY }}
-          script: cd ~/code/getpayslip && just deploy
+          script: |
+            export PATH=$PATH:~/.local/bin
+            cd ~/code/getpayslip && just deploy
