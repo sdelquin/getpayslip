@@ -6,6 +6,8 @@ run:
 [macos]
 sync:
     uv sync --no-group prod
+
+# Sync uv
 [linux]
 sync:
     uv sync --no-dev --group prod
