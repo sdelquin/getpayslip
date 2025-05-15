@@ -12,5 +12,9 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["ipython>=9.2.0", "pytest>=8.3.5"]
+dev = [
+    "ipython>=9.2.0",
+    "pypdf>=5.5.0",
+    "pytest>=8.3.5",
+]
 prod = []

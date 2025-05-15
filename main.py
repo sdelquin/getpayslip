@@ -3,25 +3,31 @@ import sys
 
 import click
 
-import date_utils
-from log import init_logger
-from payslip import PaySlip
+import lib.date_utils as date_utils
+from lib.log import init_logger
+from lib.payslip import PaySlip
 
 logger = init_logger(__file__)
 today = datetime.date.today()
 
 
 @click.command()
-@click.option("-e",
-              "--send-mail",
-              is_flag=True,
-              help="Indicates if an email will be sent")
-@click.option("--clean",
-              is_flag=True,
-              help="Remove already downloaded payslips in pdf format")
-@click.option("--browser",
-              is_flag=True,
-              help="Show the browser for debugging purposes")
+@click.option(
+    '-e',
+    '--send-mail',
+    is_flag=True,
+    help='Indicates if an email will be sent',
+)
+@click.option(
+    '--clean',
+    is_flag=True,
+    help='Remove already downloaded payslips in pdf format',
+)
+@click.option(
+    '--browser',
+    is_flag=True,
+    help='Show the browser for debugging purposes',
+)
 def main(send_mail, clean, browser):
     if clean:
         PaySlip.clean()

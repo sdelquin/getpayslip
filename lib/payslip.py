@@ -10,9 +10,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from sendgrify import SendGrid
 
-import config
-import date_utils
-from log import init_logger
+import lib.date_utils as date_utils
+import settings
+from lib.log import init_logger
 
 logger = init_logger(__file__)
 
@@ -68,8 +68,8 @@ class PaySlip:
 
         logger.info('Loading first page')
         try:
-            self.driver.get(config.PAYSLIP_URL)
-            WebDriverWait(self.driver, config.TIME_OUT).until(
+            self.driver.get(settings.PAYSLIP_URL)
+            WebDriverWait(self.driver, settings.TIME_OUT).until(
                 EC.presence_of_element_located((By.ID, 'id-login'))
             )
         except TimeoutException:
@@ -78,14 +78,14 @@ class PaySlip:
         # login
         logger.info('Login')
         element = self.driver.find_element(By.ID, 'username')
-        element.send_keys(config.MEDUSA_USERNAME)
+        element.send_keys(settings.MEDUSA_USERNAME)
         element = self.driver.find_element(By.ID, 'password')
-        element.send_keys(config.MEDUSA_PASSWORD)
+        element.send_keys(settings.MEDUSA_PASSWORD)
         element = self.driver.find_element(By.ID, 'boton-login')
         # wait for page to be loaded
         try:
             element.click()
-            payslip_button = WebDriverWait(self.driver, config.TIME_OUT).until(
+            payslip_button = WebDriverWait(self.driver, settings.TIME_OUT).until(
                 EC.presence_of_element_located((By.NAME, 'ultima'))
             )
         except TimeoutException:
@@ -113,17 +113,17 @@ tr/td[2]/table/tbody/tr/td/table[9]/tbody/tr[2]/td[3]',
 
     def _update_last_payslip(self):
         logger.info('Updating last-payslip file')
-        f = open(config.LAST_DOWNLOADED_PAYSLIP_FILE, 'w')
+        f = open(settings.LAST_DOWNLOADED_PAYSLIP_FILE, 'w')
         f.write(self.id)
         f.close()
 
     def send_payslip(self):
         logger.info('Sending email with attached downloaded payslip')
         email = SendGrid(
-            config.SENDGRID_APIKEY, config.SENDGRID_FROM_EMAIL, config.SENDGRID_FROM_NAME
+            settings.SENDGRID_APIKEY, settings.SENDGRID_FROM_EMAIL, settings.SENDGRID_FROM_NAME
         )
         email.send(
-            to=config.TO_EMAIL_ADDRESS,
+            to=settings.TO_EMAIL_ADDRESS,
             subject=f'Payslip {self}',
             msg="It's only money 💶💶💶 but I like it! 🐼",
             attachments=self.filename,

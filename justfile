@@ -15,3 +15,7 @@ sync:
 # Deploy
 deploy: && sync
     git pull
+
+# Run tests
+test *ARGS:
+    uv run pytest {{ARGS}}

@@ -1,7 +1,7 @@
 import datetime
 import re
 
-import config
+import settings
 
 MONTHS_IN_SPANISH = {
     'ENERO': 1,
@@ -15,7 +15,7 @@ MONTHS_IN_SPANISH = {
     'SEPTIEMBRE': 9,
     'OCTUBRE': 10,
     'NOVIEMBRE': 11,
-    'DICIEMBRE': 12
+    'DICIEMBRE': 12,
 }
 
 
@@ -25,11 +25,9 @@ def parse_date(date_str):
 
 
 def find_next_month():
-    f = open(config.LAST_DOWNLOADED_PAYSLIP_FILE)
+    f = open(settings.LAST_DOWNLOADED_PAYSLIP_FILE)
     last_downloaded_payslip = f.readline().strip()
     f.close()
-    year, month = int(last_downloaded_payslip[:4]),\
-        int(last_downloaded_payslip[4:])
-    next_date = datetime.date(year=year, month=month, day=1) + \
-        datetime.timedelta(days=31)
+    year, month = int(last_downloaded_payslip[:4]), int(last_downloaded_payslip[4:])
+    next_date = datetime.date(year=year, month=month, day=1) + datetime.timedelta(days=31)
     return next_date.month, next_date.year

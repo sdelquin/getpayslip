@@ -3,9 +3,9 @@ import locale
 import os
 import re
 
-import PyPDF2
+from pypdf import PdfReader
 
-from payslip import PaySlip
+from lib.payslip import PaySlip
 
 
 def getpayslip(month, year):
@@ -14,13 +14,13 @@ def getpayslip(month, year):
     assert os.path.exists(p.filename)
 
     # get the month name in spanish
-    locale.setlocale(locale.LC_ALL, "es_ES.UTF-8")
+    locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
     date = datetime.date(year, month, 1)
-    month_name = date.strftime("%B").upper()
-    date_in_spanish = f"{month_name} DE {year}"
+    month_name = date.strftime('%B').upper()
+    date_in_spanish = f'{month_name} DE {year}'
 
-    pdf_reader = PyPDF2.PdfFileReader(open(p.filename, "rb"))
-    text = pdf_reader.getPage(0).extractText().upper()
+    pdf_reader = PdfReader(p.filename)
+    text = pdf_reader.pages[0].extract_text().upper()
     assert re.search(date_in_spanish, text)
     PaySlip.clean()
 
