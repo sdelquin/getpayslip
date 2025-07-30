@@ -2,13 +2,13 @@ import calendar
 import glob
 import os
 
+from easybrevo import ApiClient
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from sendgrify import SendGrid
 
 import lib.date_utils as date_utils
 import settings
@@ -119,13 +119,11 @@ tr/td[2]/table/tbody/tr/td/table[9]/tbody/tr[2]/td[3]',
 
     def send_payslip(self):
         logger.info('Sending email with attached downloaded payslip')
-        email = SendGrid(
-            settings.SENDGRID_APIKEY, settings.SENDGRID_FROM_EMAIL, settings.SENDGRID_FROM_NAME
-        )
-        email.send(
+        client = ApiClient()
+        client.send_email(
             to=settings.TO_EMAIL_ADDRESS,
             subject=f'Payslip {self}',
-            msg="It's only money 💶💶💶 but I like it! 🐼",
+            content="It's only money 💶💶💶 but I like it! 🐼",
             attachments=self.filename,
         )
 
